@@ -27,14 +27,30 @@ export const createProduct = async (req, res) => {
 
 export const getProducts = async (req, res) => {
   try {
-    const { category, search } = req.query;
+    const { category, search, sort } = req.query;
     let query = {};
 
     if (category) query.category = category;
-    if (search) query.name = { $regex: search, $options: 'i' };
-    if (search) query.description = { $regex: search, $options: 'i' };
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } },
+        { location: { $regex: search, $options: 'i' } }
+      ];
+    }
 
-    const products = await Product.find(query).populate('farmerId', 'name phoneNumber');
+    let productsQuery = Product.find(query).populate('farmerId', 'name phoneNumber');
+
+    // Sorting logic
+    if (sort === 'price_asc') {
+      productsQuery = productsQuery.sort({ price: 1 });
+    } else if (sort === 'price_desc') {
+      productsQuery = productsQuery.sort({ price: -1 });
+    } else {
+      productsQuery = productsQuery.sort({ createdAt: -1 }); // Default: Newest first
+    }
+
+    const products = await productsQuery;
     res.json(products);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });

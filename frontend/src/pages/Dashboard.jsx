@@ -32,13 +32,19 @@ const Dashboard = () => {
             </button>
           )}
           {user?.role === 'BUYER' && (
-            <button className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-green-800 transition">
+            <button 
+              onClick={() => navigate('/my-orders')}
+              className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-green-800 transition"
+            >
               <ShoppingCart size={20} />
               <span>My Orders</span>
             </button>
           )}
           {user?.role === 'DRIVER' && (
-            <button className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-green-800 transition">
+            <button 
+              onClick={() => navigate('/my-orders')}
+              className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-green-800 transition"
+            >
               <Truck size={20} />
               <span>Available Loads</span>
             </button>

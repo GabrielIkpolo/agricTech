@@ -30,6 +30,10 @@ export const productService = {
   delete: (id) => API.delete(`/products/${id}`),
 };
 
+export const userService = {
+  getDrivers: () => API.get('/users/drivers'),
+};
+
 export const orderService = {
   placeOrder: (orderData) => API.post('/orders', orderData),
   getMyOrders: () => API.get('/orders/my-orders'),

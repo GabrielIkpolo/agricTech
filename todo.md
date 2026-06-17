@@ -1,18 +1,18 @@
 # Project Todo List: AgriTech Pipeline
 
 ## Phase 1: MVP Foundation (Web-based)
-- [ ] **Backend Setup**:
-    - [ ] Initialize Node.js project.
-    - [ ] Setup MongoDB connection using Mongoose.
-    - [ ] Define Mongoose models (User, Product, Order).
-    - [ ] Implement JWT-based Authentication (Signup/Login).
-- [ ] **Frontend Setup**:
-    - [ ] Initialize React project with Vite.
-    - [ ] Setup Tailwind CSS for styling.
-    - [ ] Create basic routing (Home, Dashboard, Login).
-- [ ] **Core Marketplace Features**:
-    - [ ] Farmer Listing Page (Create/Edit/Delete crop listings).
-    - [ ] Buyer Marketplace (Search, filter, and view products).
+- [x] **Backend Setup**:
+    - [x] Initialize Node.js project.
+    - [x] Setup MongoDB connection using Mongoose.
+    - [x] Define Mongoose models (User, Product, Order).
+    - [x] Implement JWT-based Authentication (Signup/Login).
+- [x] **Frontend Setup**:
+    - [x] Initialize React project with Vite.
+    - [x] Setup Tailwind CSS (v4) for styling.
+    - [x] Create basic routing (Home, Dashboard, Login).
+- [x] **Core Marketplace Features**:
+    - [x] Farmer Listing Page (Create/Edit/Delete crop listings).
+    - [x] Buyer Marketplace (Search, filter, and view products).
     - [ ] Order Placement logic (Buyer requests a quantity).
 - [ ] **Testing**:
     - [ ] End-to-end test: Farmer lists $\rightarrow$ Buyer orders $\rightarrow$ Order is recorded.
