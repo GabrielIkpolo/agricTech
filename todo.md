@@ -3,8 +3,8 @@
 ## Phase 1: MVP Foundation (Web-based)
 - [ ] **Backend Setup**:
     - [ ] Initialize Node.js project.
-    - [ ] Setup MongoDB connection.
-    - [ ] Configure Prisma ORM and define initial schemas (User, Product, Order).
+    - [ ] Setup MongoDB connection using Mongoose.
+    - [ ] Define Mongoose models (User, Product, Order).
     - [ ] Implement JWT-based Authentication (Signup/Login).
 - [ ] **Frontend Setup**:
     - [ ] Initialize React project with Vite.
