@@ -1,6 +1,7 @@
 import Order from '../models/Order.js';
 import Product from '../models/Product.js';
 import User from '../models/User.js';
+import { notificationService } from '../services/notificationService.js';
 
 export const placeOrder = async (req, res) => {
   try {
@@ -22,6 +23,15 @@ export const placeOrder = async (req, res) => {
       quantity,
       totalPrice,
     });
+
+    // Notify Farmer via WhatsApp
+    const farmer = await User.findById(product.farmerId);
+    if (farmer?.phoneNumber) {
+      notificationService.sendWhatsAppNotification(
+        farmer.phoneNumber, 
+        `Hello ${farmer.name}, you have a new order for ${quantity} ${product.unit} of ${product.name}! Total: ₦${totalPrice}.`
+      );
+    }
 
     // Optionally decrease product quantity (or reserve it)
     product.quantity -= quantity;
@@ -71,6 +81,15 @@ export const updateOrderStatus = async (req, res) => {
       { status, paymentStatus }, 
       { new: true }
     );
+
+    // Notify Buyer via WhatsApp
+    const orderWithUsers = await Order.findById(updatedOrder._id).populate('buyerId');
+    if (orderWithUsers?.buyerId?.phoneNumber) {
+      notificationService.sendWhatsAppNotification(
+        orderWithUsers.buyerId.phoneNumber,
+        `Your order for ${orderWithUsers.productId?.name} is now ${status}!`
+      );
+    }
 
     res.json(updatedOrder);
   } catch (error) {

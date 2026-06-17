@@ -8,6 +8,7 @@ import Marketplace from './pages/Marketplace';
 import MyProduce from './pages/MyProduce';
 import ProductDetails from './pages/ProductDetails';
 import MyOrders from './pages/MyOrders';
+import AgentDashboard from './pages/AgentDashboard';
 
 const ProtectedRoute = ({ children, role }) => {
   const { user, loading } = React.useContext(AuthContext);
@@ -55,6 +56,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <MyOrders />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/agent-dashboard" 
+            element={
+              <ProtectedRoute role="AGENT">
+                <AgentDashboard />
               </ProtectedRoute>
             } 
           />

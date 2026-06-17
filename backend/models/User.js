@@ -16,6 +16,23 @@ const userSchema = new mongoose.Schema({
     ref: 'User', 
     default: null 
   },
+  subscriptionPlan: { 
+    type: String, 
+    enum: ['FREE', 'PREMIUM'], 
+    default: 'FREE' 
+  },
+  subscriptionUntil: { 
+    type: Date, 
+    default: Date.now 
+  },
+  averageRating: { 
+    type: Number, 
+    default: 0 
+  },
+  totalReviews: { 
+    type: Number, 
+    default: 0 
+  },
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

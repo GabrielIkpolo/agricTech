@@ -22,6 +22,15 @@ const Dashboard = () => {
             <Package size={20} />
             <span>Marketplace</span>
           </button>
+          {user?.role === 'AGENT' && (
+            <button 
+              onClick={() => navigate('/agent-dashboard')}
+              className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-green-800 transition"
+            >
+              <Users size={20} />
+              <span>Agent Panel</span>
+            </button>
+          )}
           {user?.role === 'FARMER' && (
             <button 
               onClick={() => navigate('/my-produce')}

@@ -13,18 +13,19 @@
 - [x] **Core Marketplace Features**:
     - [x] Farmer Listing Page (Create/Edit/Delete crop listings).
     - [x] Buyer Marketplace (Search, filter, and view products).
-    - [ ] Order Placement logic (Buyer requests a quantity).
-- [ ] **Testing**:
-    - [ ] End-to-end test: Farmer lists $\rightarrow$ Buyer orders $\rightarrow$ Order is recorded.
+    - [x] Order Placement logic (Buyer requests a quantity).
+- [x] **Testing**:
+    - [x] End-to-end test: Farmer lists $\rightarrow$ Buyer orders $\rightarrow$ Order is recorded.
 
 ## Phase 2: Trust & Logistics (The "Meat")
 - [ ] **Payment Integration**:
     - [ ] Integrate Paystack/Flutterwave API.
     - [ ] Implement Escrow logic (Payment status: `Pending` $\rightarrow$ `Held` $\rightarrow$ `Released`).
-- [ ] **Logistics Matching**:
-    - [ ] Driver Role setup & Dashboard.
-    - [ ] "Available Loads" feed for Drivers.
-    - [ ] Shipment status updates (Picked up $\rightarrow$ Delivered).
+- [x] **Logistics Matching**:
+    - [x] Driver Role setup & Dashboard.
+    - [x] "Available Loads" feed for Drivers.
+    - [x] Shipment status updates (Picked up $\rightarrow$ Delivered).
+    - [x] Driver Assignment logic (Farmer assigns Driver).
 - [ ] **Feedback Loop**:
     - [ ] Rating and Review system for all parties.
 

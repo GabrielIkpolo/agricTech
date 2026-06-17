@@ -34,6 +34,22 @@ export const userService = {
   getDrivers: () => API.get('/users/drivers'),
 };
 
+export const reviewService = {
+  create: (reviewData) => API.post('/reviews', reviewData),
+  getByProduct: (productId) => API.get(`/reviews/${productId}`),
+};
+
+export const agentService = {
+  createFarmer: (farmerData) => API.post('/agents/farmers', farmerData),
+  getFarmers: () => API.get('/agents/farmers'),
+  getProducts: () => API.get('/agents/products'),
+  updateProduct: (productId, data) => API.put(`/agents/products/${productId}`, data),
+};
+
+export const paymentService = {
+  initialize: (orderId) => API.post('/payments/initialize', { orderId }),
+};
+
 export const orderService = {
   placeOrder: (orderData) => API.post('/orders', orderData),
   getMyOrders: () => API.get('/orders/my-orders'),

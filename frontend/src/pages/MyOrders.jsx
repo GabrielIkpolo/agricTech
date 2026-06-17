@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { orderService, userService } from '../services/api';
+import { orderService, userService, paymentService } from '../services/api';
 import { AuthContext } from '../context/AuthContext';
 import { Package, Truck, CheckCircle, Clock, AlertCircle, User } from 'lucide-react';
+import ReviewModal from '../components/ReviewModal';
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
@@ -10,6 +11,7 @@ const MyOrders = () => {
   const [loading, setLoading] = useState(true);
   const [assigningDriverId, setAssigningDriverId] = useState(null);
   const [selectedDriver, setSelectedDriver] = useState('');
+  const [reviewingOrder, setReviewingOrder] = useState(null);
 
   const fetchOrders = async () => {
     setLoading(true);
@@ -60,6 +62,19 @@ const MyOrders = () => {
     }
   };
 
+  const handlePay = async (orderId) => {
+    try {
+      const { data } = await paymentService.initialize(orderId);
+      if (data.data && data.data.authorization_url) {
+        window.location.href = data.data.authorization_url;
+      } else {
+        alert("Payment initialization failed");
+      }
+    } catch (err) {
+      alert(err.response?.data?.message || "Error initiating payment");
+    }
+  };
+
   const getStatusIcon = (status) => {
     switch (status) {
       case 'DELIVERED': return <CheckCircle className="text-green-500" size={18} />;
@@ -96,6 +111,12 @@ const MyOrders = () => {
                       {getStatusIcon(order.status)}
                       <span>{order.status}</span>
                     </div>
+                    {order.paymentStatus !== 'UNPAID' && (
+                      <div className="flex items-center space-x-1 text-sm font-medium px-2 py-1 bg-green-100 text-green-700 rounded-md">
+                        <CheckCircle size={12} />
+                        <span>Paid</span>
+                      </div>
+                    )}
                   </div>
                   <p className="text-sm text-gray-500">
                     Quantity: {order.quantity} {order.productId?.unit} | Total: <span className="font-bold text-primary">₦{order.totalPrice}</span>
@@ -120,6 +141,16 @@ const MyOrders = () => {
               </div>
 
               <div className="flex items-center space-x-2 w-full md:w-auto">
+                {/* Buyer's Action: Pay Now */}
+                {user.role === 'BUYER' && order.buyerId._id === user._id && order.paymentStatus === 'UNPAID' && (
+                  <button 
+                    onClick={() => handlePay(order._id)}
+                    className="flex-1 md:flex-none px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-opacity-90 transition"
+                  >
+                    Pay Now
+                  </button>
+                )}
+
                 {/* Farmer's Action: Assign Driver */}
                 {user.role === 'FARMER' && order.sellerId._id === user._id && order.status === 'PENDING' && !order.driverId && (
                   <button 
@@ -143,13 +174,23 @@ const MyOrders = () => {
                   </button>
                 )}
 
-                {/* Buyer's Action: Mark as Delivered */}
+                {/* Buyer's Action: Mark as Delivered & Rate */}
                 {user.role === 'BUYER' && order.buyerId._id === user._id && order.status === 'SHIPPED' && (
                   <button 
                     onClick={() => handleUpdateStatus(order._id, 'DELIVERED')}
                     className="flex-1 md:flex-none px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 transition"
                   >
                     Confirm Delivery
+                  </button>
+                )}
+                
+                {/* Buyer's Action: Rate Farmer (Only after Delivered) */}
+                {user.role === 'BUYER' && order.buyerId._id === user._id && order.status === 'DELIVERED' && (
+                  <button 
+                    onClick={() => setReviewingOrder(order)}
+                    className="flex-1 md:flex-none px-4 py-2 bg-yellow-500 text-white rounded-lg text-sm font-medium hover:bg-yellow-600 transition"
+                  >
+                    Rate Seller
                   </button>
                 )}
 
@@ -213,6 +254,17 @@ const MyOrders = () => {
             </form>
           </div>
         </div>
+      )}
+
+      {/* Review Modal */}
+      {reviewingOrder && (
+        <ReviewModal 
+          order={reviewingOrder}
+          product={reviewingOrder.productId}
+          farmerId={reviewingOrder.sellerId._id}
+          onClose={() => setReviewingOrder(null)}
+          onSubmitted={() => fetchOrders()}
+        />
       )}
     </div>
   );
