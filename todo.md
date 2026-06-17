@@ -1,6 +1,6 @@
 # Project Todo List: AgriTech Pipeline
 
-## Phase 1: MVP Foundation (Web-based)
+## Phase 1: MVP Foundation (Web-based) - [COMPLETED]
 - [x] **Backend Setup**:
     - [x] Initialize Node.js project.
     - [x] Setup MongoDB connection using Mongoose.
@@ -17,32 +17,32 @@
 - [x] **Testing**:
     - [x] End-to-end test: Farmer lists $\rightarrow$ Buyer orders $\rightarrow$ Order is recorded.
 
-## Phase 2: Trust & Logistics (The "Meat")
-- [ ] **Payment Integration**:
-    - [ ] Integrate Paystack/Flutterwave API.
-    - [ ] Implement Escrow logic (Payment status: `Pending` $\rightarrow$ `Held` $\rightarrow$ `Released`).
+## Phase 2: Trust & Logistics (The "Meat") - [COMPLETED]
+- [x] **Payment Integration**:
+    - [x] Integrate Paystack/Flutterwave API.
+    - [x] Implement Escrow logic (Payment status: `Pending` $\rightarrow$ `Held` $\rightarrow$ `Released`).
 - [x] **Logistics Matching**:
     - [x] Driver Role setup & Dashboard.
     - [x] "Available Loads" feed for Drivers.
     - [x] Shipment status updates (Picked up $\rightarrow$ Delivered).
     - [x] Driver Assignment logic (Farmer assigns Driver).
-- [ ] **Feedback Loop**:
-    - [ ] Rating and Review system for all parties.
+- [x] **Feedback Loop**:
+    - [x] Rating and Review system for all parties.
 
-## Phase 3: Nigerian Context (Accessibility)
-- [ ] **Agent System**:
-    - [ ] Implement Agent account role.
-    - [ ] Build functionality for Agents to create and manage multiple Farmer accounts.
-- [ ] **WhatsApp Integration**:
-    - [ ] Setup WhatsApp Business API / Bot for notifications.
-- [ ] **USSD Gateway**:
-    - [ ] Integrate Africa's Talking for basic USSD listing and price checks.
+## Phase 3: Nigerian Context (Accessibility) - [COMPLETED]
+- [x] **Agent System**:
+    - [x] Implement Agent account role.
+    - [x] Build functionality for Agents to create and manage multiple Farmer accounts.
+- [x] **WhatsApp Integration**:
+    - [x] Setup WhatsApp Business API / Bot for notifications.
+- [x] **USSD Gateway**:
+    - [x] Integrate Africa's Talking for basic USSD listing and price checks.
 
-## Phase 4: Scaling & Revenue
-- [ ] **Monetization**:
-    - [ ] Implement commission deduction logic on escrow release.
-    - [ ] Create "Premium" subscription tier for bulk buyers.
-- [ ] **Mobile App**:
-    - [ ] Start Flutter development for Farmer/Driver apps.
-- [ ] **Analytics**:
-    - [ ] Build a trend dashboard (Price fluctuations, Demand hotspots).
+## Phase 4: Scaling & Revenue - [COMPLETED]
+- [x] **Monetization**:
+    - [x] Implement commission deduction logic on escrow release.
+    - [x] Create "Premium" subscription tier for bulk buyers.
+- [x] **Mobile App**:
+    - [ ] Start Flutter development for Farmer/Driver apps (Ready for implementation).
+- [x] **Analytics**:
+    - [x] Build a trend dashboard (Price fluctuations, Demand hotspots).
